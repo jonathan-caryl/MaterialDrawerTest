@@ -16,6 +16,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private static final long ID1 = 1;
+    private static final boolean SHOULD_CRASH_ON_UPDATE = true;
     private Drawer drawer;
 
     @Override
@@ -23,15 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawer = new DrawerBuilder()
+        DrawerBuilder drawerBuilder = new DrawerBuilder()
             .addDrawerItems()
             .withActivity(this)
-            .withDrawerItems(generateNavItems())
-            .withHeader(R.layout.drawer_header)
-            .withActionBarDrawerToggle(true)
-            .withDelayOnDrawerClose(0)
-            .withFooter(R.layout.drawer_footer)
-            .build();
+            .withDrawerItems(generateNavItems());
+        if (SHOULD_CRASH_ON_UPDATE) {
+            drawerBuilder.withFooter(R.layout.drawer_footer);
+        }
+
+        drawer = drawerBuilder.build();
 
         Button button = (Button)findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
