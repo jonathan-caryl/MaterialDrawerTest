@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MaterialDrawerTest</string>
+    <string name="update_drawer_item">Update drawer item</string>
+</resources>
